@@ -511,7 +511,7 @@ function enable_extension() {
 
 	# compare before and after, thus getting the functions defined by the extension.
 	# comm is oldskool. we like it. go "man comm" to understand -13 below
-	new_function_list="$(comm -13 <(echo "$before_function_list" | sort) <(echo "$after_function_list" | sort))"
+	new_function_list="$(LC_ALL=C $(command -v gnucomm || echo comm) -13 <(echo "$before_function_list" | sort) <(echo "$after_function_list" | sort))"
 
 	# iterate over defined functions, store them in global associative array extension_function_info
 	for newly_defined_function in ${new_function_list}; do
