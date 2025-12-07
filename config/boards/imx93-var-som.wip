@@ -1,0 +1,21 @@
+# Variscite VAR-SOM-iMX93 on Symphony carrier board
+# https://www.variscite.com/product/system-on-module-som/cortex-a55/var-som-mx93-nxp-i-mx93/
+
+BOARD_NAME="Variscite VAR-SOM-iMX93"
+BOARDFAMILY="imx93"
+BOARD_MAINTAINER=""
+
+BOOTCONFIG="imx93_var_som_defconfig"
+KERNEL_TARGET="current"
+
+DEFAULT_CONSOLE="serial"
+SERIALCON="ttyLP0"
+
+HAS_VIDEO_OUTPUT="yes"
+
+# Main device tree - Symphony carrier board
+BOOT_FDT_FILE="freescale/imx93-var-som-symphony.dtb"
+
+# ATF platform settings for iMX93
+ATF_PLAT="imx93"
+ATF_UART_BASE="0x44380000"
