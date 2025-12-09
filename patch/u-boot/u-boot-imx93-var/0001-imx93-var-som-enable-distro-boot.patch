@@ -1,0 +1,43 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Armbian <info@armbian.com>
+Date: Mon, 9 Dec 2025 12:00:00 +0100
+Subject: [PATCH] imx93-var-som: enable distro boot for Armbian
+
+Change boot command from bsp_bootcmd to distro_bootcmd to enable
+extlinux.conf based booting which is used by Armbian.
+
+Also add ramdisk_addr_r which is required by distro boot.
+
+Signed-off-by: Armbian <info@armbian.com>
+---
+ configs/imx93_var_som_defconfig | 2 +-
+ include/configs/imx93_var_som.h | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/configs/imx93_var_som_defconfig b/configs/imx93_var_som_defconfig
+index abcdef123..67890abcd 100644
+--- a/configs/imx93_var_som_defconfig
++++ b/configs/imx93_var_som_defconfig
+@@ -35,7 +35,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_OF_SYSTEM_SETUP=y
+-CONFIG_BOOTCOMMAND="run bsp_bootcmd"
++CONFIG_BOOTCOMMAND="setenv boot_targets mmc${mmcdev}; run distro_bootcmd"
+ CONFIG_DEFAULT_FDT_FILE="imx93-var-som-symphony.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2074
+diff --git a/include/configs/imx93_var_som.h b/include/configs/imx93_var_som.h
+index abcdef123..67890abcd 100644
+--- a/include/configs/imx93_var_som.h
++++ b/include/configs/imx93_var_som.h
+@@ -47,6 +47,7 @@ INDEX
+ 	"script=boot.scr\0" \
+ 	"scriptaddr=0x83500000\0" \
+ 	"kernel_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
++	"ramdisk_addr_r=0x88000000\0" \
+ 	"image=Image.gz\0" \
+ 	"img_addr=0x82000000\0" \
+ 	"splashimage=0x90000000\0" \
+--
+2.43.0
